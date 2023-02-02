@@ -133,7 +133,7 @@ class Show:
         if len(show['description']) < 3:
             flash("Show Description must be at least 3 characters long!", "newshow")
             is_valid = False
-        if len(show["title"]) <= 0 or len(show["network"]) <= 0 or show["release_date"] =='' or len(show["password"]) <= 0:
+        if len(show["title"]) <= 0 or len(show["network"]) <= 0 or show["release_date"] =='' or len(show["description"]) <= 0:
             flash("All fields are required, process incomplete!", "newshow")
         return is_valid
 
