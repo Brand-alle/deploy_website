@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>TV Show</title>
+</head>
+<body class="bg-dark">
+    <div class="d-flex bg-dark my-2 justify-content-between text-center border-bottom border-primary p-3">
+        <a class="btn btn-success ms-auto col-2 h-50" href="/show_wall">TV Shows</a>
+        <a class="btn btn-danger col-2 h-50" href="/logout">Logout!</a>
+    </div>
+    <div class="flex justify-content-around col-10 mx-auto p-3">
+        <div class="text-end text-warning">
+            <h5>Liked By: {{show.likes}}</h5>
+        </div>
+        <h1 class="text-info mx-auto my-2 text-center"><strong>{{show.title}}</strong></h1>
+        <div class="d-flex my-2">
+            <h3 class="text-info mx-auto my-2 text-start"><strong>- Network:</strong></h3>
+            <h3 class="text-info mx-auto my-2 text-start">{{show.network}}</h3>
+        </div>
+        <div class="d-flex my-2">
+            <h3 class="text-info mx-auto my-2 text-start"><strong>- Release Date:</strong></h3>
+            <h3 class="text-info mx-auto my-2 text-start"> {{show.release_date.strftime('%B %d %Y')}}</h3>
+        </div>
+        <div class=" my-5">
+            <h3 class="text-info mx-auto my-2 text-center"><strong>- Description:</strong></h3>
+            <h3 class="text-info mx-auto my-2 text-start">{{show.description}}</h3>
+        </div>
+        <div class="d-flex my-2">
+            <h3 class="text-info mx-auto my-2 text-start"><strong>- Posted By:</strong></h3>
+            <h3 class="text-info mx-auto my-2 text-start">{{show.creator.first_name}} {{show.creator.last_name}}</h3>
+        </div>
+        <div class="mx-auto col-8 text-center text-info p-5">
+            {% if session.user_id == show.creator.id %}
+            <a class="btn btn-warning" href="/shows/edit/{{show.id}}"> Edit </a> 
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

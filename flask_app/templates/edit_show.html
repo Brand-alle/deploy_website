@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>TV Shows</title>
+</head>
+<body class="bg-dark">
+    <div class="d-flex bg-dark my-2 justify-content-between text-center border-bottom border-primary p-3">
+        <h2 class="text-center text-info h1">Edit Show!</h2>
+        <a class="btn btn-success ms-auto col-2 h-50" href="/show_wall">TV Shows</a>
+        <a class="btn btn-danger col-2 h-50" href="/logout">Logout!</a>
+    </div>
+    <form action="/shows/update/{{show.id}}" class=" flex mx-auto text-center text-info col-7" method="post">
+        {% with messages = get_flashed_messages( category_filter=['newshow'] ) %}        <!-- declare a variable called messages -->
+            {% if messages %}           <!-- check if there are any messages -->
+                {% for message in messages %}       <!-- loop through the messages -->
+                    <p class="flashes text-danger">{{message}}</p>      <!-- display each message in a paragraph tag -->
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <div class="form-group text-start my-2">
+            <label class="h4" for="title">Title:</label>
+            <input type="text" name="title" id="title" placeholder="{{show.title}}" value="{{show.title}}" class="form-control">
+        </div>
+        <div class="form-group text-start my-2">
+            <label class="h4" for="network">Network:</label>
+            <input class="form-control" name="network" placeholder="{{show.network}}" value="{{show.network}}" id="network" cols="30" rows="3">
+        </div>
+        <div class="form-group text-start my-2">
+            <label class="h4" for="release_date">Release Date:</label>
+            <input type="date" id="release_date" placeholder="{{show.release_date}}" value="{{show.release_date}}"name="release_date">
+        </div>
+        <div class="form-group text-start my-2">
+            <label class="h4" for="description">Description:</label>
+            <textarea class="form-control" name="description" placeholder="{{show.description}}" value="{{show.description}}"id="description" cols="30" rows="3"></textarea>
+        </div>
+        <input type="submit" class="btn btn-info justify-center" value="Update">
+    </form>
+    <div class="flex p-5 text-center">
+        <a class="btn btn-info" href="/shows/view/{{show.id}}">Show </a>
+        {% if session.user_id == show.creator.id %}
+        <a class="btn btn-danger" href="/shows/delete/{{show.id}}"> Delete </a>
+        {% endif %}
+    </div>
+</body>
+</html>
